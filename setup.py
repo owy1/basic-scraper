@@ -8,7 +8,8 @@ setup(
     version='0.1',
     author='Ophelia',
     license='MIT',
-    py_modules=['healthinspect'],
+    py_modules=['scraper'],
     package_dir={'': 'src'},
+    install_requires=['beautifulsoup4', 'requests']
     extras_require={'testing': ['pytest', 'pytest-watch', 'tox']}
 )
