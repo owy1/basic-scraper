@@ -10,6 +10,6 @@ setup(
     license='MIT',
     py_modules=['scraper'],
     package_dir={'': 'src'},
-    install_requires=['beautifulsoup4', 'requests']
+    install_requires=['beautifulsoup4', 'requests', 'html5lib']
     extras_require={'testing': ['pytest', 'pytest-watch', 'tox']}
 )
