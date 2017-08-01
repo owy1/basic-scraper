@@ -1,7 +1,8 @@
 """Learning to web scrap."""
 from bs4 import BeautifulSoup
 import requests
-import sys, os
+import sys
+import os
 import re
 
 
@@ -64,7 +65,7 @@ def extract_data_listings(html):
 
 
 def has_two_tds(elem):
-    """return True if the element is both a <tr> and contains exactly two <td> elements immediately within it."""
+    """Return True if the element is both a <tr> and contains exactly two <td> elements immediately within it."""
     is_tr = elem.name == 'tr'
     td_children = elem.find_all('td', recursive=False)
     has_two = len(td_children) == 2
@@ -144,8 +145,15 @@ if __name__ == '__main__':  # pragma: no cover
         html, encoding = get_inpsection_page(**kwargs)
     doc = parse_source(html, encoding)
     listings = extract_data_listings(doc)
-    for listing in listings[:5]:
+    dct = {}
+    for listing in listings:
         metadata = extract_restaurant_metadata(listing)
         score_data = extract_score_data(listing)
-        metadata.update(score_data)
-        print(metadata)
+        both = dict(metadata, **score_data)
+        dct.update({metadata['Business Name'][0]: both})
+        first5pairs = {k: dct[k] for k in list(dct.keys())[:5]}
+        for name, dictionary in first5pairs.items():
+            print(name)
+            for data, val in dictionary.items():
+                print(data, val)
+        print()
