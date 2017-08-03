@@ -140,7 +140,7 @@ def extract_score_data(elem):
     return data
 
 
-def generate_results(sort='High Score', count=5, reverse=False, test=False):
+def generate_results(sort=None, count=5, reverse=False, test=False):
     """."""
     kwargs = {
         'Inspection_Start': '2/1/2017',
@@ -159,11 +159,11 @@ def generate_results(sort='High Score', count=5, reverse=False, test=False):
         score_data = extract_score_data(listing)
         metadata.update(score_data)
         data_list.append(metadata)
-    if sort == 'High Score':
+    if sort == 'highscore':
         sort = u'High Score'
-    if sort == 'Average Score':
+    if sort == 'average':
         sort = u'Average Score'
-    if sort == 'Total Inspections':
+    if sort == 'inspections':
         sort = u'Total Inspections'
     # import pdb; pdb.set_trace()
     try:
@@ -208,13 +208,13 @@ if __name__ == '__main__':  # pragma: no cover
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-s', '--sort',
-                        help='select: Average Score, High Score, Total Inspections',
+                        help="select: average, highscore, inspections",
                         type=str)
     parser.add_argument('-c', '--count',
                         help="enter number of results",
                         type=int)
     parser.add_argument('-r', '--reverse',
-                        help='select: True or False',
+                        help="select: True or False",
                         type=bool)
     args = parser.parse_args()
 
